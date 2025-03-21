@@ -11,7 +11,7 @@ function config {
 mkdir -p .dotfiles-backup
 config checkout
 if [ $? = 0 ]; then
-  echo "Checked out dotfiles from git@github.com:vscode_dotfiles/vscode_dotfiles.git";
+  echo "Checked out dotfiles from git@github.com:kleinjm/vscode_dotfiles.git";
   else
     echo "Moving existing dotfiles to ~/.dotfiles-backup";
     config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .dotfiles-backup/{}
