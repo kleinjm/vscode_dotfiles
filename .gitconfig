@@ -1,0 +1,59 @@
+[user]
+  name = James Klein
+  email = kleinjm007@gmail.com
+[alias]
+    a = add -A
+    ap = add -p
+    c = commit --verbose
+    ca = commit -a --verbose
+    cam = commit -a -m
+    cm = commit -m
+    co = checkout
+    cob = checkout -b
+    d = diff
+    dc = diff --cached
+    ds = diff --stat
+    l = log
+    m = commit --amend --verbose
+    main = !git fetch --prune && git checkout main && git pull origin main && :
+    s = status -s
+
+    # push the current branch
+    publish = push -u origin HEAD
+
+    # list branches sorted by last modified
+    b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+    br = branch
+
+    lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+
+    # list aliases
+    la = "!git config -l | grep alias | cut -c 7-"
+	count-lines = "! git log --author=\"$1\" --pretty=tformat: --numstat | awk '{ add += $1; subs += $2; loc += $1 - $2 } END { printf \"added lines: %s, removed lines: %s, total lines: %s\\n\", add, subs, loc }' #"
+[core]
+	excludesfile = ~/.gitignore_global
+	editor = vim
+	mergeoptions = --no-edit
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path =
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[credential]
+	helper = osxkeychain
+[init]
+	templatedir = ~/.git_template
+	defaultBranch = main
+[web]
+	browser = open
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[diff]
+	colorMoved = zebra
+[pull]
+	rebase = false
+	ff = only
