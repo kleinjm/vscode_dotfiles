@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+
+# create a directory for git templates if it doesn't exist
+mkdir -p $HOME/.git_template
+
+# clone the dotfiles repo into the git template directory
 git clone --bare git@github.com:kleinjm/vscode_dotfiles.git $HOME/.dotfiles
 
 # define config alias locally since the dotfiles
