@@ -22,3 +22,5 @@ stow -v -t "$HOME" -d . git
 
 # Run install scripts after everything has been set up
 ./install_scripts/zsh_autosuggestions.sh
+
+source $HOME/.zshrc
