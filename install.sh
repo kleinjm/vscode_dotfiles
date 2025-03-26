@@ -3,13 +3,6 @@
 # create a directory for git templates if it doesn't exist
 mkdir -p $HOME/.git_template
 
-# clone the dotfiles repo into the git template directory only if it doesn't exist
-if [ ! -d "$HOME/vscode_dotfiles" ]; then
-  git clone --bare git@github.com:kleinjm/vscode_dotfiles.git $HOME/vscode_dotfiles
-else
-  echo "VS Code dotfiles repo already exists. Continuing..."
-fi
-
 # Install oh-my-zsh if it doesn't exist
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
   yes | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
