@@ -62,7 +62,7 @@ HISTSIZE=1000000 # amount of commands saved in history
 # NOTE: zsh-syntax-highlighting was affecting boot performance
 # NOTE: rails plugin temporarily removed because `rg` shortcut messed
 # with ripgrep
-plugins=(docker-compose git bundler rake ruby tmux docker command-not-found colored-man-pages)
+plugins=(docker-compose git bundler rake ruby docker command-not-found colored-man-pages)
 
 # manually trigger autosuggestions
 AUTOSUGGESTIONS_DIR=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
@@ -70,28 +70,8 @@ if [ -d "$AUTOSUGGESTIONS_DIR" ]; then
   source $AUTOSUGGESTIONS_DIR/zsh-autosuggestions.zsh
 fi
 
-# QT added to path to fix gem install capybara-webkit issue
-# openssl added to fix issue with brew installing over the system version
-# mysql added to fix issue with brew linking
-export PATH=$HOME/.rbenv/bin:/usr/local/sbin:/usr/local/opt/mysql@5.7/bin:/usr/local/opt/openssl/bin:$PATH
-
 # NOTE: PATH must be before this
 source $ZSH/oh-my-zsh.sh
-
-# source local env vars if they exist.
-# NOTE: oh-my-zsh overrides some things ie. `ls` at
-# https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/theme-and-appearance.zsh#L24
-# thus, these files need to be defined after sourcing oh-my-zsh.sh
-# See https://github.com/robbyrussell/oh-my-zsh/issues/5783#issuecomment-275614664
-export LOCAL_CONFIG=$PRIVATE_CONFIGS_DIR/zshrc.local
-if [ -f $LOCAL_CONFIG ]; then
-  source $LOCAL_CONFIG
-fi
-
-export EDITOR='nvim' # Preferred editor for local and remote sessions
-export SSH_KEY_PATH="~/.ssh/rsa_id" # ssh
-# something was setting RBENV_VERSION and it was preventing using .ruby-version
-export RBENV_VERSION=
 
 # See https://github.com/zsh-users/zsh-autosuggestions#usage
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20 # turn off autosuggest for large paste
@@ -108,25 +88,3 @@ for file in $HOME/*.zsh; do
 done
 
 source $HOME/.oh-my-zsh/custom/plugins/*.zsh
-
-### PYENV and Python - https://github.com/pyenv/pyenv#homebrew-on-mac-os-x ###
-# NOTE: Step #2 & #3 here says to place in zshenv rather than zshrc but that did
-# not work. Leave it here
-# https://github.com/pyenv/pyenv#basic-github-checkout
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init --path)"
-fi
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-# Always put new terminal sessions in a tmux session if not already in one
-# (3/17/25) Disabled due to conflict with Cursor/VS Code
-# if [[ -z "$TMUX" ]]; then
-#   tmux new-session -A -s "$USER"
-# fi
-
-# Terraform autocomplete installed via `terraform -install-autocomplete`
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/local/bin/terraform terraform
-
-eval "$(rbenv init -)"

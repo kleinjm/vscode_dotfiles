@@ -1,22 +1,22 @@
 #!/usr/bin/env bash
-git clone --bare git@github.com:kleinjm/vscode_dotfiles.git $HOME/.dotfiles
 
-# define config alias locally since the dotfiles
-# aren't installed on the system yet
-function config {
-   git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
-}
+# create a directory for git templates if it doesn't exist
+mkdir -p $HOME/.git_template
 
-# create a directory to backup existing dotfiles to
-mkdir -p .dotfiles-backup
-config checkout
-if [ $? = 0 ]; then
-  echo "Checked out dotfiles from git@github.com:kleinjm/vscode_dotfiles.git";
-  else
-    echo "Moving existing dotfiles to ~/.dotfiles-backup";
-    config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .dotfiles-backup/{}
+# clone the dotfiles repo into the git template directory only if it doesn't exist
+if [ ! -d "$HOME/vscode_dotfiles" ]; then
+  git clone --bare git@github.com:kleinjm/vscode_dotfiles.git $HOME/vscode_dotfiles
+else
+  echo "VS Code dotfiles repo already exists. Continuing..."
 fi
 
-# checkout dotfiles from repo
-config checkout
-config config status.showUntrackedFiles no
+# Install stow
+yes | sudo apt-get install stow
+
+# v = verbose, t = target directory, d = current directory
+rm -rf $HOME/.zshrc
+stow -v -t "$HOME" -d . zsh
+stow -v -t "$HOME" -d . git
+
+# Run install scripts after everything has been set up
+./install_scripts/zsh_autosuggestions.sh
