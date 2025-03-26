@@ -4,30 +4,12 @@
 # Author: James Klein
 ##############################################################################
 
-# On slow systems, checking the cached .zcompdump file to see if it must be
-# regenerated adds a noticable delay to zsh startup.  This little hack restricts
-# it to once a day.  It should be pasted into your own completion file.
-# See https://gist.github.com/ctechols/ca1035271ad134841284#gistcomment-2767420
-#
-# The globbing is a little complicated here:
-# - '#q' is an explicit glob qualifier that makes globbing work within zsh's [[ ]] construct.
-# - 'N' makes the glob pattern evaluate to nothing when it doesn't match (rather than throw a globbing error)
-# - '.' matches "regular files"
-# - 'm1' matches files (or directories or whatever) that are older than 24 hours.
-autoload -Uz compinit
-setopt EXTENDEDGLOB
-for dump in $HOME/.zcompdump(#qN.m1); do
-  compinit
-  if [[ -s "$dump" && (! -s "$dump.zwc" || "$dump" -nt "$dump.zwc") ]]; then
-    zcompile "$dump"
-  fi
-done
-unsetopt EXTENDEDGLOB
-compinit -C
+export ZSH=$HOME/.oh-my-zsh # Path to your oh-my-zsh installation.
+export DOTFILES_DIR=$HOME/vscode_dotfiles
+export PRIVATE_CONFIGS_DIR=$HOME/GitHubRepos/environment_configurations
 
-# Allows running rake commands in ZSH with arguments.
-# See https://thoughtbot.com/blog/how-to-use-arguments-in-a-rake-task
-unsetopt nomatch
+# See https://stackoverflow.com/a/49462622/2418828
+export APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE="true"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -70,9 +52,6 @@ if [ -d "$AUTOSUGGESTIONS_DIR" ]; then
   source $AUTOSUGGESTIONS_DIR/zsh-autosuggestions.zsh
 fi
 
-# NOTE: PATH must be before this
-source $ZSH/oh-my-zsh.sh
-
 # See https://github.com/zsh-users/zsh-autosuggestions#usage
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20 # turn off autosuggest for large paste
 export ZSH_AUTOSUGGEST_USE_ASYNC=1 # do autosuggest async
@@ -86,5 +65,3 @@ export GIT_MERGE_AUTOEDIT=no
 for file in $HOME/*.zsh; do
   source "$file"
 done
-
-source $HOME/.oh-my-zsh/custom/plugins/*.zsh
