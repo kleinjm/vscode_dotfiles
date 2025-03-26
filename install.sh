@@ -17,10 +17,10 @@ yes | sudo apt-get install stow
 # v = verbose, t = target directory, d = current directory
 rm -rf $HOME/.zshrc
 rm -rf $HOME/.gitconfig
-stow -v -t "$HOME" -d . zsh
-stow -v -t "$HOME" -d . git
+stow -v -t "$HOME" -d $HOME/dotfiles zsh
+stow -v -t "$HOME" -d $HOME/dotfiles git
 
 # Run install scripts after everything has been set up
-./install_scripts/zsh_autosuggestions.sh
+$HOME/dotfiles/install_scripts/zsh_autosuggestions.sh
 
 source $HOME/.zshrc
