@@ -11,6 +11,7 @@ else
 fi
 
 # Install stow
+sudo apt-get update
 yes | sudo apt-get install stow
 
 # v = verbose, t = target directory, d = current directory
