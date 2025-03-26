@@ -16,11 +16,7 @@ alias rm="rm -v" # -i will ask confirmation before deleting a file
 # Use modern regexps for sed, ie. "(one|two)", not "\(one\|two\)"
 alias sed="sed -E"
 
-# When copy-pasting a command, $ will be ignored. Ie. "$ ruby my_file.rb"
-alias \$=''
-
-alias -g G="| ag " # ie. "rails routes G user" vs "rails routes | ag user"
-alias ag="ag --path-to-ignore ~/.ag_ignore"
+alias G="| grep " # ie. "rails routes G user" 
 
 # Git
 alias ga='git add'
@@ -33,4 +29,3 @@ alias rT="bundle exec rake -T | grep " # search rake tasks
 alias rake='noglob rake' # https://github.com/robbyrussell/oh-my-zsh/issues/433#issuecomment-1670663
 alias rc!="spring stop && rails console"
 alias update="main && gprune && bundle && yarn && spring stop && rails db:migrate && rails restart"
-
