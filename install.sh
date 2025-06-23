@@ -20,6 +20,13 @@ rm -rf $HOME/.gitconfig
 stow -v -t "$HOME" -d $HOME/dotfiles zsh
 stow -v -t "$HOME" -d $HOME/dotfiles git
 
+# Restore MCP config if present
+if [ -f "$HOME/dotfiles/mcp.json" ]; then
+  mkdir -p $HOME/.cursor
+  cp "$HOME/dotfiles/mcp.json" "$HOME/.cursor/mcp.json"
+  echo "Restored MCP config to $HOME/.cursor/mcp.json"
+fi
+
 # Run install scripts after everything has been set up
 $HOME/dotfiles/install_scripts/zsh_autosuggestions.sh
 

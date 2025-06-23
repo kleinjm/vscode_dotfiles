@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "node",
+      "args": ["./node_modules/@playwright/mcp/lib/program.js", "--isolated", "--headless", "--no-sandbox", "--browser", "chromium"]
+    }
+  }
+}
