@@ -29,5 +29,6 @@ fi
 
 # Run install scripts after everything has been set up
 $HOME/dotfiles/install_scripts/zsh_autosuggestions.sh
+$HOME/dotfiles/install_scripts/node_dependencies.sh
 
 source $HOME/.zshrc

@@ -11,7 +11,7 @@ prompt_yellow() { prompt_color "$1" yellow }
 prompt_spaced() { [[ -n "$1" ]] && print " $@" }
 
 prompt_ruby_version() {
-  local version=$(rbenv version-name)
+  local version=$(ruby --version | cut -d' ' -f2)
   prompt_magenta "$version "
 }
 
