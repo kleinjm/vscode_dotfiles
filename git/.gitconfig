@@ -40,8 +40,6 @@
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
-[credential]
-	helper = "!f() { /home/vscode/.cursor-server/bin/b6fb41b5f36bda05cab7109606e7404a65d1ff30/node /tmp/vscode-remote-containers-8f6cb22c-59d0-46e3-87a2-b9ae6713beb9.js git-credential-helper $*; }; f"
 [init]
 	templatedir = ~/.git_template
 	defaultBranch = main
