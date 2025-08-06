@@ -14,6 +14,11 @@ fi
 sudo apt-get update
 yes | sudo apt-get install stow
 
+# AgentOS and Claude config files
+# This assumes there is a workspace directory with the dotfiles in it within this container
+ln -s /workspaces/dotfiles/mac/.agent-os "$HOME"
+ln -s /workspaces/dotfiles/mac/.claude "$HOME"
+
 # v = verbose, t = target directory, d = current directory
 rm -rf $HOME/.zshrc
 rm -rf $HOME/.gitconfig
@@ -30,5 +35,6 @@ fi
 # Run install scripts after everything has been set up
 $HOME/dotfiles/install_scripts/zsh_autosuggestions.sh
 $HOME/dotfiles/install_scripts/node_dependencies.sh
+
 
 source $HOME/.zshrc
