@@ -66,3 +66,8 @@ export GIT_MERGE_AUTOEDIT=no
 for file in $HOME/*.zsh; do
   source "$file"
 done
+
+# Load custom scripts from dotfiles
+if [ -f "$DOTFILES_DIR/zsh/wt.sh" ]; then
+  source "$DOTFILES_DIR/zsh/wt.sh"
+fi
