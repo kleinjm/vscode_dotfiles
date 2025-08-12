@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+export DOTFILES_DIR=/workspaces/vscode_dotfiles
+
 # create a directory for git templates if it doesn't exist
 mkdir -p $HOME/.git_template
 
@@ -22,19 +24,19 @@ ln -s /workspaces/dotfiles/mac/.claude "$HOME"
 # v = verbose, t = target directory, d = current directory
 rm -rf $HOME/.zshrc
 rm -rf $HOME/.gitconfig
-stow -v -t "$HOME" -d $HOME/dotfiles zsh
-stow -v -t "$HOME" -d $HOME/dotfiles git
+stow -v -t "$HOME" -d $DOTFILES_DIR zsh
+stow -v -t "$HOME" -d $DOTFILES_DIR git
 
 # Restore MCP config if present
-if [ -f "$HOME/dotfiles/mcp.json" ]; then
+if [ -f "$DOTFILES_DIR/mcp.json" ]; then
   mkdir -p $HOME/.cursor
-  cp "$HOME/dotfiles/mcp.json" "$HOME/.cursor/mcp.json"
+  cp "$DOTFILES_DIR/mcp.json" "$HOME/.cursor/mcp.json"
   echo "Restored MCP config to $HOME/.cursor/mcp.json"
 fi
 
 # Run install scripts after everything has been set up
-$HOME/dotfiles/install_scripts/zsh_autosuggestions.sh
-$HOME/dotfiles/install_scripts/node_dependencies.sh
+$DOTFILES_DIR/install_scripts/zsh_autosuggestions.sh
+$DOTFILES_DIR/install_scripts/node_dependencies.sh
 
 
 source $HOME/.zshrc

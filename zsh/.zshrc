@@ -5,8 +5,7 @@
 ##############################################################################
 
 export ZSH=$HOME/.oh-my-zsh # Path to your oh-my-zsh installation.
-export DOTFILES_DIR=$HOME/vscode_dotfiles
-export PRIVATE_CONFIGS_DIR=$HOME/GitHubRepos/environment_configurations
+export DOTFILES_DIR=/workspaces/vscode_dotfiles
 
 # See https://stackoverflow.com/a/49462622/2418828
 export APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE="true"
