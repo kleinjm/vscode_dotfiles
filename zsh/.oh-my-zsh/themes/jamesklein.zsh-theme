@@ -31,8 +31,15 @@ prompt_language_version() {
   fi
 }
 
+prompt_container_indicator() {
+  # Check if we're in a devcontainer by looking for common container env vars or paths
+  if [[ -n "$REMOTE_CONTAINERS_IPC" ]] || [[ "$PWD" == /workspaces/* ]]; then
+    echo "🐳 "
+  fi
+}
+
 local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
-PROMPT='${ret_status} $(prompt_language_version)%{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)'
+PROMPT='$(prompt_container_indicator)${ret_status} $(prompt_language_version)%{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)'
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}%{$fg[red]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "

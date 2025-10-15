@@ -70,3 +70,4 @@ done
 if [ -f "$DOTFILES_DIR/zsh/wt.sh" ]; then
   source "$DOTFILES_DIR/zsh/wt.sh"
 fi
+export PATH="$HOME/.yarn/bin:$PATH"
